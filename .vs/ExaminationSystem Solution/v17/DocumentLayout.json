@@ -1,0 +1,113 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "E:\\.Net Project\\ExaminationSystem\\ExaminationSystem Solution\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{4F93F5DF-40B8-4175-A693-B8306D4BB6F0}|ExaminationSystem.Api\\ExaminationSystem.Api.csproj|e:\\.net project\\examinationsystem\\examinationsystem solution\\examinationsystem.api\\controllers\\instructorscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4F93F5DF-40B8-4175-A693-B8306D4BB6F0}|ExaminationSystem.Api\\ExaminationSystem.Api.csproj|solutionrelative:examinationsystem.api\\controllers\\instructorscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4F93F5DF-40B8-4175-A693-B8306D4BB6F0}|ExaminationSystem.Api\\ExaminationSystem.Api.csproj|e:\\.net project\\examinationsystem\\examinationsystem solution\\examinationsystem.api\\controllers\\examscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4F93F5DF-40B8-4175-A693-B8306D4BB6F0}|ExaminationSystem.Api\\ExaminationSystem.Api.csproj|solutionrelative:examinationsystem.api\\controllers\\examscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4F93F5DF-40B8-4175-A693-B8306D4BB6F0}|ExaminationSystem.Api\\ExaminationSystem.Api.csproj|e:\\.net project\\examinationsystem\\examinationsystem solution\\examinationsystem.api\\controllers\\coursescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4F93F5DF-40B8-4175-A693-B8306D4BB6F0}|ExaminationSystem.Api\\ExaminationSystem.Api.csproj|solutionrelative:examinationsystem.api\\controllers\\coursescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4F93F5DF-40B8-4175-A693-B8306D4BB6F0}|ExaminationSystem.Api\\ExaminationSystem.Api.csproj|e:\\.net project\\examinationsystem\\examinationsystem solution\\examinationsystem.api\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4F93F5DF-40B8-4175-A693-B8306D4BB6F0}|ExaminationSystem.Api\\ExaminationSystem.Api.csproj|solutionrelative:examinationsystem.api\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 1,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "Program.cs",
+              "DocumentMoniker": "E:\\.Net Project\\ExaminationSystem\\ExaminationSystem Solution\\ExaminationSystem.Api\\Program.cs",
+              "RelativeDocumentMoniker": "ExaminationSystem.Api\\Program.cs",
+              "ToolTip": "E:\\.Net Project\\ExaminationSystem\\ExaminationSystem Solution\\ExaminationSystem.Api\\Program.cs",
+              "RelativeToolTip": "ExaminationSystem.Api\\Program.cs",
+              "ViewState": "AQIAABIAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-07-27T12:30:14.68Z",
+              "IsPinned": true,
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "InstructorsController.cs",
+              "DocumentMoniker": "E:\\.Net Project\\ExaminationSystem\\ExaminationSystem Solution\\ExaminationSystem.Api\\Controllers\\InstructorsController.cs",
+              "RelativeDocumentMoniker": "ExaminationSystem.Api\\Controllers\\InstructorsController.cs",
+              "ToolTip": "E:\\.Net Project\\ExaminationSystem\\ExaminationSystem Solution\\ExaminationSystem.Api\\Controllers\\InstructorsController.cs",
+              "RelativeToolTip": "ExaminationSystem.Api\\Controllers\\InstructorsController.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAgAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-07-27T13:32:47.224Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "ExamsController.cs",
+              "DocumentMoniker": "E:\\.Net Project\\ExaminationSystem\\ExaminationSystem Solution\\ExaminationSystem.Api\\Controllers\\ExamsController.cs",
+              "RelativeDocumentMoniker": "ExaminationSystem.Api\\Controllers\\ExamsController.cs",
+              "ToolTip": "E:\\.Net Project\\ExaminationSystem\\ExaminationSystem Solution\\ExaminationSystem.Api\\Controllers\\ExamsController.cs",
+              "RelativeToolTip": "ExaminationSystem.Api\\Controllers\\ExamsController.cs",
+              "ViewState": "AQIAAD4AAAAAAAAAAAAAAEUAAAAmAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-07-27T13:13:39.007Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "CoursesController.cs",
+              "DocumentMoniker": "E:\\.Net Project\\ExaminationSystem\\ExaminationSystem Solution\\ExaminationSystem.Api\\Controllers\\CoursesController.cs",
+              "RelativeDocumentMoniker": "ExaminationSystem.Api\\Controllers\\CoursesController.cs",
+              "ToolTip": "E:\\.Net Project\\ExaminationSystem\\ExaminationSystem Solution\\ExaminationSystem.Api\\Controllers\\CoursesController.cs",
+              "RelativeToolTip": "ExaminationSystem.Api\\Controllers\\CoursesController.cs",
+              "ViewState": "AQIAADUAAAAAAAAAAAAAAD4AAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-07-27T12:31:15.638Z",
+              "EditorCaption": ""
+            }
+          ]
+        },
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": -1,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{1c64b9c2-e352-428e-a56d-0ace190b99a6}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
+            }
+          ]
+        },
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": -1,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{3ae79031-e1bc-11d0-8f78-00a0c9110057}"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
