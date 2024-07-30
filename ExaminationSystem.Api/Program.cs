@@ -5,6 +5,8 @@ using ExaminationSystem.Api.Data;
 using Microsoft.EntityFrameworkCore;
 using System.Diagnostics;
 using ExaminationSystem.Api.AutoFac;
+using AutoMapper;
+using ExaminationSystem.Api.profiles;
 
 namespace ExaminationSystem.Api;
 
@@ -16,23 +18,26 @@ public class Program
 
         // Add services to the container.
 
-       
-
         builder.Services.AddControllers();
         // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
         builder.Services.AddEndpointsApiExplorer();
         builder.Services.AddSwaggerGen();
 
+        ILoggerFactory MyLoggerFactory = LoggerFactory.Create(builder => { builder.AddConsole(); });
+
         builder.Services.AddDbContext<StoreContext>(Options =>
-        {
-            Options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"))
-            .LogTo(log => Debug.WriteLine(log), LogLevel.Information)
-            .EnableSensitiveDataLogging();
-        });
+            {
+                Options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"))
+                  .UseLoggerFactory(MyLoggerFactory)
+                  .LogTo(log => Debug.WriteLine(log), LogLevel.Information)
+                    .EnableSensitiveDataLogging();
+            });
 
         builder.Host.UseServiceProviderFactory(new AutofacServiceProviderFactory());
         builder.Host.ConfigureContainer<ContainerBuilder>(builder =>
             builder.RegisterModule(new AutoFacModule()));
+
+        builder.Services.AddAutoMapper(typeof(Questionprofile));
 
         var app = builder.Build();
 

@@ -13,9 +13,23 @@ public class ExamQuestionService : IExamQuestionService
     {
         _examQuestionrepository = ExamQuestionrepository;
     }
+
+    public void CreateExamQuestion(int ExamId, int QuestionID)
+    {
+
+        var Q = _examQuestionrepository.Add(new ExamQuestion
+        {
+            ExamID = ExamId,
+            QuestionID = QuestionID
+
+        });
+
+        _examQuestionrepository.SaveChanges();
+    }
+
     public List<int> CreateExamQuestion(int ExamId, ICollection<int> QuestionsIDs)
     {
-        List<int> Oids = new List<int>(); 
+        List<int> Oids = new List<int>();
 
         foreach (var id in QuestionsIDs)
         {
@@ -31,4 +45,6 @@ public class ExamQuestionService : IExamQuestionService
 
         return Oids;
     }
+
+    
 }

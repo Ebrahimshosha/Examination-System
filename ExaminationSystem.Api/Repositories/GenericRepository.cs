@@ -2,6 +2,7 @@
 using ExaminationSystem.Api.Interfaces;
 using ExaminationSystem.Api.Models;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Query;
 using System.Linq.Expressions;
 
 namespace ExaminationSystem.Api.Repositories;
@@ -21,9 +22,10 @@ public class GenericRepository<T> : IGenericRepository<T> where T : BaseModel
         return entity;
     }
 
-    public void Update(T entity)
+    public T Update(T entity)
     {
         _context.Set<T>().Update(entity);
+        return entity;
     }
 
     public void Delete(T entity)
@@ -51,16 +53,25 @@ public class GenericRepository<T> : IGenericRepository<T> where T : BaseModel
         return GetAll().Where(predicate);
     }
 
-    public IQueryable<T> GetAll()
+    public IQueryable<T> GetAll( )
     {
         return _context.Set<T>().Where(x => !x.IsDeleted).AsNoTracking();
         //return _context.Set<T>().Where(x => !x.Deleted).AsNoTrackingWithIdentityResolution(); // better than AsNoTracking() 
     }
-
+    //public IQueryable<T> Get(Expression<Func<T,bool>> predicate )
+    //{
+    //    return _context.Set<T>().Where(predicate);
+    //    //return _context.Set<T>().Where(x => !x.Deleted).AsNoTrackingWithIdentityResolution(); // better than AsNoTracking() 
+    //}
+    public IQueryable<T> GetAllWithInclude(string include)
+    {
+        return _context.Set<T>().Where(x => !x.IsDeleted).AsNoTracking().Include(include);
+        //return _context.Set<T>().Where(x => !x.Deleted).AsNoTrackingWithIdentityResolution(); // better than AsNoTracking() 
+    }
     public T GetByID(int id)
     {
-        //return _context.Find<T>(id);
-        return GetAll().FirstOrDefault(x => x.Id == id);
+        return _context.Find<T>(id);
+        //return GetAll().FirstOrDefault(x => x.Id == id);
     }
 
     public T GetWithTrackinByID(int id)
