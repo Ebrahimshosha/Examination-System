@@ -69,7 +69,7 @@ public class QuestionsController : BaseApiController
             
             _choiceService.Removechoice(question.Id);
             question = _questionsRepository.Update(question);
-            
+
             _questionsRepository.SaveChanges();
             var questionToReturnDto = _mapper.Map<QuestionToReturnDto>(question);
             return Ok(questionToReturnDto);

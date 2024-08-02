@@ -1,4 +1,5 @@
-﻿using ExaminationSystem.Api.Models;
+﻿using ExaminationSystem.Api.DTO.Choices;
+using ExaminationSystem.Api.Models;
 
 namespace ExaminationSystem.Api.ViewModels.CreateQuestionViewModel;
 
@@ -9,4 +10,5 @@ public class CreateQuestionViewModel
     public List<string> Choices { get; set; } = new List<string>();
     public string RightAnswer { get; set; }
     public int ExamId { get; set; }
+
 }

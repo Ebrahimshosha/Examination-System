@@ -1,6 +1,9 @@
-﻿using ExaminationSystem.Api.Data;
+﻿using AutoMapper;
+using ExaminationSystem.Api.Data;
+using ExaminationSystem.Api.DTO.Course;
 using ExaminationSystem.Api.Interfaces;
 using ExaminationSystem.Api.Models;
+using ExaminationSystem.Api.Services.StudentService;
 using ExaminationSystem.Api.ViewModels.Course;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -10,43 +13,54 @@ namespace ExaminationSystem.Api.Controllers;
 public class CoursesController : BaseApiController
 {
     private readonly IGenericRepository<Course> _courserepository;
+    private readonly IStudentCourseService _studentCourseService;
+    private readonly IMapper _mapper;
 
-    public CoursesController(IGenericRepository<Course> Courserepository)
+    public CoursesController(IGenericRepository<Course> Courserepository
+        ,IStudentCourseService studentCourseService,
+        IMapper mapper)
     {
         _courserepository = Courserepository;
+        _studentCourseService = studentCourseService;
+        _mapper = mapper;
     }
 
     [HttpGet]
-    public ActionResult<IEnumerable<Course>> GetAllCourses( )
+    public ActionResult<IEnumerable<CourseToReturnDto>> GetAllCourses()
     {
-        var Courses = _courserepository.GetAll();
-        return Ok( Courses );
+        var courses = _courserepository.GetAll();
+        var coursesToReturnDto = _mapper.ProjectTo<CourseToReturnDto>(courses);
+        return Ok(coursesToReturnDto);
 
     }
 
     [HttpGet("{id}")]
-    public ActionResult<Course> GetCourseById(int id)
+    public ActionResult<CourseToReturnDto> GetCourseById(int id)
     {
         var course = _courserepository.GetByID(id);
-        return Ok( course );    
+
+        var CourseToReturnDto = _mapper.Map<CourseToReturnDto>(course);
+        return Ok(CourseToReturnDto);
     }
 
     [HttpPost]
-    public ActionResult<Course> AddCourse(CreateCourseViewModel model)
+    public ActionResult<CourseToReturnDto> AddCourse(CreateCourseViewModel model)
     {
-       var course = _courserepository.Add(new Course
+        var course = _courserepository.Add(new Course
         {
             CreditHours = model.CreditHours,
             InstructorId = model.InstructorId,
             Name = model.Name
-            
+
         });
         _courserepository.SaveChanges();
-        return Ok(course);
+
+        var CourseToReturnDto = _mapper.Map<CourseToReturnDto>(course);
+        return Ok(CourseToReturnDto);
     }
 
     [HttpPut]
-    public ActionResult<Course> UpdateCourse(int id, CreateCourseViewModel model)
+    public ActionResult<CourseToReturnDto> UpdateCourse(int id, CreateCourseViewModel model)
     {
         var course = _courserepository.GetByID(id);
 
@@ -58,14 +72,22 @@ public class CoursesController : BaseApiController
         _courserepository.Update(course);
         _courserepository.SaveChanges();
 
-        return Ok(course);
+        var CourseToReturnDto = _mapper.Map<CourseToReturnDto>(course);
+        return Ok(CourseToReturnDto);
     }
 
     [HttpDelete]
-    public ActionResult DeleteCourse(int id) 
+    public ActionResult DeleteCourse(int id)
     {
         _courserepository.Delete(id);
         _courserepository.SaveChanges();
+        return Ok();
+    }
+
+    [HttpPost("StudentId{id}")]
+    public ActionResult EnrollToCourse(int id,int CourseId)
+    {
+        _studentCourseService.EnrollCourseToStudent(id, CourseId);
         return Ok();
     }
 }

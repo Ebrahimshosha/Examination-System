@@ -38,6 +38,9 @@ public class Program
             builder.RegisterModule(new AutoFacModule()));
 
         builder.Services.AddAutoMapper(typeof(Questionprofile));
+        builder.Services.AddAutoMapper(typeof(ExamProfile));
+        builder.Services.AddAutoMapper(typeof(CourseProfile));
+        builder.Services.AddAutoMapper(typeof(StudentProfile));
 
         var app = builder.Build();
 

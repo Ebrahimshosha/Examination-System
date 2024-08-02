@@ -89,6 +89,10 @@ namespace ExaminationSystem.Api.Data.Migirations
                     b.Property<int>("CourseId")
                         .HasColumnType("int");
 
+                    b.Property<string>("ExamStatus")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<int>("InstructorId")
                         .HasColumnType("int");
 
@@ -213,12 +217,67 @@ namespace ExaminationSystem.Api.Data.Migirations
                     b.ToTable("Students");
                 });
 
+            modelBuilder.Entity("ExaminationSystem.Api.Models.StudentCourse", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("CourseId")
+                        .HasColumnType("int");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<int>("StudentId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CourseId");
+
+                    b.HasIndex("StudentId");
+
+                    b.ToTable("StudentCourse");
+                });
+
+            modelBuilder.Entity("ExaminationSystem.Api.Models.StudentExam", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("ExamId")
+                        .HasColumnType("int");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<double>("Result")
+                        .HasColumnType("float");
+
+                    b.Property<int>("StudentId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ExamId");
+
+                    b.HasIndex("StudentId");
+
+                    b.ToTable("StudentExam");
+                });
+
             modelBuilder.Entity("ExaminationSystem.Api.Models.Choice", b =>
                 {
                     b.HasOne("ExaminationSystem.Api.Models.Question", "Question")
                         .WithMany("Choices")
                         .HasForeignKey("QuestionID")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.Navigation("Question");
@@ -229,7 +288,7 @@ namespace ExaminationSystem.Api.Data.Migirations
                     b.HasOne("ExaminationSystem.Api.Models.Instructor", "Instructor")
                         .WithMany()
                         .HasForeignKey("InstructorId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.Navigation("Instructor");
@@ -240,13 +299,13 @@ namespace ExaminationSystem.Api.Data.Migirations
                     b.HasOne("ExaminationSystem.Api.Models.Course", "Course")
                         .WithMany("Exams")
                         .HasForeignKey("CourseId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.HasOne("ExaminationSystem.Api.Models.Instructor", "Instructor")
                         .WithMany("Exams")
                         .HasForeignKey("InstructorId")
-                        .OnDelete(DeleteBehavior.NoAction)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.Navigation("Course");
@@ -259,13 +318,13 @@ namespace ExaminationSystem.Api.Data.Migirations
                     b.HasOne("ExaminationSystem.Api.Models.Exam", "Exam")
                         .WithMany("ExamQuestions")
                         .HasForeignKey("ExamID")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.HasOne("ExaminationSystem.Api.Models.Question", "Question")
                         .WithMany("ExamQuestions")
                         .HasForeignKey("QuestionID")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.Navigation("Exam");
@@ -273,14 +332,56 @@ namespace ExaminationSystem.Api.Data.Migirations
                     b.Navigation("Question");
                 });
 
+            modelBuilder.Entity("ExaminationSystem.Api.Models.StudentCourse", b =>
+                {
+                    b.HasOne("ExaminationSystem.Api.Models.Course", "Course")
+                        .WithMany("studentCourses")
+                        .HasForeignKey("CourseId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("ExaminationSystem.Api.Models.Student", "Student")
+                        .WithMany("studentCourses")
+                        .HasForeignKey("StudentId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("Course");
+
+                    b.Navigation("Student");
+                });
+
+            modelBuilder.Entity("ExaminationSystem.Api.Models.StudentExam", b =>
+                {
+                    b.HasOne("ExaminationSystem.Api.Models.Exam", "Exam")
+                        .WithMany("StudentExams")
+                        .HasForeignKey("ExamId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("ExaminationSystem.Api.Models.Student", "Student")
+                        .WithMany("studentExams")
+                        .HasForeignKey("StudentId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("Exam");
+
+                    b.Navigation("Student");
+                });
+
             modelBuilder.Entity("ExaminationSystem.Api.Models.Course", b =>
                 {
                     b.Navigation("Exams");
+
+                    b.Navigation("studentCourses");
                 });
 
             modelBuilder.Entity("ExaminationSystem.Api.Models.Exam", b =>
                 {
                     b.Navigation("ExamQuestions");
+
+                    b.Navigation("StudentExams");
                 });
 
             modelBuilder.Entity("ExaminationSystem.Api.Models.Instructor", b =>
@@ -293,6 +394,13 @@ namespace ExaminationSystem.Api.Data.Migirations
                     b.Navigation("Choices");
 
                     b.Navigation("ExamQuestions");
+                });
+
+            modelBuilder.Entity("ExaminationSystem.Api.Models.Student", b =>
+                {
+                    b.Navigation("studentCourses");
+
+                    b.Navigation("studentExams");
                 });
 #pragma warning restore 612, 618
         }

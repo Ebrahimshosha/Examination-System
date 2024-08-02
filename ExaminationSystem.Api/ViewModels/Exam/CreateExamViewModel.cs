@@ -11,4 +11,6 @@ public class CreateExamViewModel
     public int InstructorId { get; set; }
 
     public int CourseId { get; set; }
+    public string ExamStatus { get; set; }
+
 }
