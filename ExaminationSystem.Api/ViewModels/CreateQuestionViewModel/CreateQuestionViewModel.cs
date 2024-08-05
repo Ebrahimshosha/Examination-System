@@ -10,5 +10,7 @@ public class CreateQuestionViewModel
     public List<string> Choices { get; set; } = new List<string>();
     public string RightAnswer { get; set; }
     public int ExamId { get; set; }
+    public string Status { get; set; }
+
 
 }

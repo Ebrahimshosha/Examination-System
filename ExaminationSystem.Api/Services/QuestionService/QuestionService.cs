@@ -5,10 +5,11 @@ using ExaminationSystem.Api.Services.ChoiceService;
 using ExaminationSystem.Api.Services.ExamQuestionService;
 using ExaminationSystem.Api.Services.ExamService;
 using ExaminationSystem.Api.ViewModels.CreateQuestionViewModel;
+using System.Collections.Generic;
 
 namespace ExaminationSystem.Api.Services.QuestionService;
 
-public class QuestionService: IQuestionService
+public class QuestionService : IQuestionService
 {
     private readonly IGenericRepository<Question> _questionRepository;
     private readonly IGenericRepository<Choice> _choiceRepository;
@@ -42,6 +43,55 @@ public class QuestionService: IQuestionService
         _choiceService.Addchoice(question.Id, model.Choices, model.RightAnswer);
 
         return question;
+    }
+
+    public int CalculateTotalGrade(ICollection<int> Qids)
+    {
+        var quetions = _questionRepository.Get(q => Qids.Contains(q.Id));
+        var totalGrade = quetions.Sum(q => q.Grade);
+        return totalGrade;
+    }
+
+
+
+    public List<int> CreateRandomQuestionsIds(int NumberOfQuestions, int CoureId)
+    {
+        int simple = NumberOfQuestions / 3;
+        int medium = NumberOfQuestions / 3;
+        int hard = NumberOfQuestions - simple - medium;
+
+        var AllsimpleQuestions = _questionRepository.Get(q => q.Id == CoureId && q.Status == QStatus.simple);
+        var AllmediumQuestions = _questionRepository.Get(q => q.Id == CoureId && q.Status == QStatus.medium);
+        var AllhardQuestions = _questionRepository.Get(q => q.Id == CoureId && q.Status == QStatus.hard);
+
+        var RandomQuestionsIds = new List<int>();
+
+        RandomQuestionsIds.AddRange(CreateSpecificRandomQuestionsIds(AllsimpleQuestions, simple));
+
+        RandomQuestionsIds.AddRange(CreateSpecificRandomQuestionsIds(AllmediumQuestions, simple));
+
+        RandomQuestionsIds.AddRange(CreateSpecificRandomQuestionsIds(AllhardQuestions, simple));
+
+        return RandomQuestionsIds;
+
+    }
+
+    public List<int> CreateSpecificRandomQuestionsIds(IQueryable<Question> questions, int NumberOfQuestions)
+    {
+
+        List<int> AllQuestionsIds = questions.Select(a => a.Id).ToList();
+
+        Random random = new Random();
+
+        List<int> RandomQuestionsIds = new List<int>();
+
+        for (int i = 0; i < NumberOfQuestions; i++)
+        {
+            int randomIndex = random.Next(0, questions.Count());
+            RandomQuestionsIds.Add(AllQuestionsIds[randomIndex]);
+        }
+
+        return RandomQuestionsIds;
 
     }
 }

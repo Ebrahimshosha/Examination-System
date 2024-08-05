@@ -7,6 +7,18 @@
       "RelativeMoniker": "D:0:0:{4F93F5DF-40B8-4175-A693-B8306D4BB6F0}|ExaminationSystem.Api\\ExaminationSystem.Api.csproj|solutionrelative:examinationsystem.api\\services\\examservice\\examservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
+      "AbsoluteMoniker": "D:0:0:{4F93F5DF-40B8-4175-A693-B8306D4BB6F0}|ExaminationSystem.Api\\ExaminationSystem.Api.csproj|e:\\.net project\\examinationsystem\\examination-system\\examinationsystem.api\\services\\vlidationiftakenfinalexam\\validateiftakenfinalexam.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4F93F5DF-40B8-4175-A693-B8306D4BB6F0}|ExaminationSystem.Api\\ExaminationSystem.Api.csproj|solutionrelative:examinationsystem.api\\services\\vlidationiftakenfinalexam\\validateiftakenfinalexam.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4F93F5DF-40B8-4175-A693-B8306D4BB6F0}|ExaminationSystem.Api\\ExaminationSystem.Api.csproj|e:\\.net project\\examinationsystem\\examination-system\\examinationsystem.api\\profiles\\examprofile.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4F93F5DF-40B8-4175-A693-B8306D4BB6F0}|ExaminationSystem.Api\\ExaminationSystem.Api.csproj|solutionrelative:examinationsystem.api\\profiles\\examprofile.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4F93F5DF-40B8-4175-A693-B8306D4BB6F0}|ExaminationSystem.Api\\ExaminationSystem.Api.csproj|e:\\.net project\\examinationsystem\\examination-system\\examinationsystem.api\\services\\examservice\\iexamservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4F93F5DF-40B8-4175-A693-B8306D4BB6F0}|ExaminationSystem.Api\\ExaminationSystem.Api.csproj|solutionrelative:examinationsystem.api\\services\\examservice\\iexamservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{4F93F5DF-40B8-4175-A693-B8306D4BB6F0}|ExaminationSystem.Api\\ExaminationSystem.Api.csproj|e:\\.net project\\examinationsystem\\examination-system\\examinationsystem.api\\controllers\\examscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{4F93F5DF-40B8-4175-A693-B8306D4BB6F0}|ExaminationSystem.Api\\ExaminationSystem.Api.csproj|solutionrelative:examinationsystem.api\\controllers\\examscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
@@ -22,20 +34,59 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 1,
+          "SelectedChildIndex": 4,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 5,
               "Title": "Program.cs",
               "DocumentMoniker": "E:\\.Net Project\\ExaminationSystem\\Examination-System\\ExaminationSystem.Api\\Program.cs",
               "RelativeDocumentMoniker": "ExaminationSystem.Api\\Program.cs",
               "ToolTip": "E:\\.Net Project\\ExaminationSystem\\Examination-System\\ExaminationSystem.Api\\Program.cs",
               "RelativeToolTip": "ExaminationSystem.Api\\Program.cs",
-              "ViewState": "AQIAABoAAAAAAAAAAAAAAB8AAAAgAAAA",
+              "ViewState": "AQIAABYAAAAAAAAAAADgvx8AAAAgAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-07-27T12:30:14.68Z",
               "IsPinned": true,
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "ValidateIfTakenFinalExam.cs",
+              "DocumentMoniker": "E:\\.Net Project\\ExaminationSystem\\Examination-System\\ExaminationSystem.Api\\Services\\VlidationIfTakenFinalExam\\ValidateIfTakenFinalExam.cs",
+              "RelativeDocumentMoniker": "ExaminationSystem.Api\\Services\\VlidationIfTakenFinalExam\\ValidateIfTakenFinalExam.cs",
+              "ToolTip": "E:\\.Net Project\\ExaminationSystem\\Examination-System\\ExaminationSystem.Api\\Services\\VlidationIfTakenFinalExam\\ValidateIfTakenFinalExam.cs",
+              "RelativeToolTip": "ExaminationSystem.Api\\Services\\VlidationIfTakenFinalExam\\ValidateIfTakenFinalExam.cs",
+              "ViewState": "AQIAABUAAAAAAAAAAAAAACoAAAAUAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-08-04T21:51:00.737Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "IExamService.cs",
+              "DocumentMoniker": "E:\\.Net Project\\ExaminationSystem\\Examination-System\\ExaminationSystem.Api\\Services\\ExamService\\IExamService.cs",
+              "RelativeDocumentMoniker": "ExaminationSystem.Api\\Services\\ExamService\\IExamService.cs",
+              "ToolTip": "E:\\.Net Project\\ExaminationSystem\\Examination-System\\ExaminationSystem.Api\\Services\\ExamService\\IExamService.cs",
+              "RelativeToolTip": "ExaminationSystem.Api\\Services\\ExamService\\IExamService.cs",
+              "ViewState": "AQIAAAEAAAAAAAAAAAAjwAoAAAARAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-08-04T18:12:59.721Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "ExamProfile.cs",
+              "DocumentMoniker": "E:\\.Net Project\\ExaminationSystem\\Examination-System\\ExaminationSystem.Api\\profiles\\ExamProfile.cs",
+              "RelativeDocumentMoniker": "ExaminationSystem.Api\\profiles\\ExamProfile.cs",
+              "ToolTip": "E:\\.Net Project\\ExaminationSystem\\Examination-System\\ExaminationSystem.Api\\profiles\\ExamProfile.cs",
+              "RelativeToolTip": "ExaminationSystem.Api\\profiles\\ExamProfile.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABAAAAArAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-08-04T18:51:01.248Z",
               "EditorCaption": ""
             },
             {
@@ -46,22 +97,22 @@
               "RelativeDocumentMoniker": "ExaminationSystem.Api\\Services\\ExamService\\ExamService.cs",
               "ToolTip": "E:\\.Net Project\\ExaminationSystem\\Examination-System\\ExaminationSystem.Api\\Services\\ExamService\\ExamService.cs",
               "RelativeToolTip": "ExaminationSystem.Api\\Services\\ExamService\\ExamService.cs",
-              "ViewState": "AQIAADYAAAAAAAAAAAAAAD4AAAAIAAAA",
+              "ViewState": "AQIAAFIAAAAAAAAAAAAAAFgAAABLAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-08-01T13:26:46.008Z",
+              "WhenOpened": "2024-08-03T17:40:17.183Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 4,
               "Title": "ExamsController.cs",
               "DocumentMoniker": "E:\\.Net Project\\ExaminationSystem\\Examination-System\\ExaminationSystem.Api\\Controllers\\ExamsController.cs",
               "RelativeDocumentMoniker": "ExaminationSystem.Api\\Controllers\\ExamsController.cs",
               "ToolTip": "E:\\.Net Project\\ExaminationSystem\\Examination-System\\ExaminationSystem.Api\\Controllers\\ExamsController.cs",
               "RelativeToolTip": "ExaminationSystem.Api\\Controllers\\ExamsController.cs",
-              "ViewState": "AQIAAEsAAAAAAAAAAAA6wFYAAAAoAAAA",
+              "ViewState": "AQIAAFYAAAAAAAAAAAAAAGIAAAAoAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-08-01T13:07:29.455Z",
+              "WhenOpened": "2024-08-03T17:38:15.934Z",
               "EditorCaption": ""
             }
           ]

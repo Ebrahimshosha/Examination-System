@@ -6,6 +6,7 @@ namespace ExaminationSystem.Api.Services.ExamService;
 
 public interface IExamService
 {
-    ExamToReturnDto CreateExamService(ExamDto model);
-     Exam TakeExam(int studentId, int Courseid, string examStatus);
+    ExamToReturnDto CreateManualExamService(ExamManualDto model);
+    ExamToReturnDto CreateAutomaticExamService(ExamAutomaticDto model);
+    Exam TakeExam(int studentId, int Courseid, string examStatus);
 }

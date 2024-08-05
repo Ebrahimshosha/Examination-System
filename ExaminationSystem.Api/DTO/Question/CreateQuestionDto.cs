@@ -1,4 +1,6 @@
-﻿namespace ExaminationSystem.Api.DTO.Question;
+﻿using ExaminationSystem.Api.Models;
+
+namespace ExaminationSystem.Api.DTO.Question;
 
 public class CreateQuestionDto
 {
@@ -7,4 +9,6 @@ public class CreateQuestionDto
     public List<string> Choices { get; set; } = new List<string>();
     public string RightAnswer { get; set; }
     public int ExamId { get; set; }
+    public string Status { get; set; }
+
 }

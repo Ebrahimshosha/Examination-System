@@ -4,9 +4,12 @@ using ExaminationSystem.Api.Interfaces;
 using ExaminationSystem.Api.Models;
 using ExaminationSystem.Api.Services.ExamQuestionService;
 using ExaminationSystem.Api.Services.ExamService;
+using ExaminationSystem.Api.Services.StudentExamService;
 using ExaminationSystem.Api.ViewModels.Exam;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.FileProviders;
 
 namespace ExaminationSystem.Api.Controllers;
 
@@ -15,17 +18,20 @@ public class ExamsController : BaseApiController
     private readonly IExamService _examService;
     private readonly IMapper _mapper;
     private readonly IExamQuestionService _examQuestionService;
+    private readonly IStudentExamService _studentExamService;
     private readonly IGenericRepository<Exam> _examrepository;
 
     public ExamsController(
         IExamService examService,
         IMapper mapper,
         IExamQuestionService examQuestionService,
+        IStudentExamService studentExamService,
         IGenericRepository<Exam> Examrepository)
     {
         _examService = examService;
         _mapper = mapper;
         _examQuestionService = examQuestionService;
+        _studentExamService = studentExamService;
         _examrepository = Examrepository;
     }
 
@@ -43,16 +49,23 @@ public class ExamsController : BaseApiController
         return Ok(exam);
     }
 
-    [HttpPost]
-    public ActionResult<ExamToReturnDto> AddExam(CreateExamViewModel viewModel)
+    [HttpPost("Manual")]
+    public ActionResult<ExamToReturnDto> CreateManualExam(CreateManualExamViewModel viewModel)
     {
-        var examDto = _mapper.Map<ExamDto>(viewModel);
-        var examToReturnDto = _examService.CreateExamService(examDto);
+        var examDto = _mapper.Map<ExamManualDto>(viewModel);
 
-        if (examToReturnDto == null)
-        {
-            return BadRequest("Can not Add more than One final to the same course");
-        }
+        var examToReturnDto = _examService.CreateManualExamService(examDto);
+
+        return examToReturnDto;
+    }
+
+    [HttpPost("Automatic")]
+    public ActionResult<ExamToReturnDto> CreateAutomaticExam(CreateAutomaticExamViewModel viewModel)
+    {
+        var examDto = _mapper.Map<ExamAutomaticDto>(viewModel);
+
+        var examToReturnDto = _examService.CreateAutomaticExamService(examDto);
+
         return examToReturnDto;
     }
 
@@ -64,7 +77,6 @@ public class ExamsController : BaseApiController
         exam.CourseId = viewModel.CourseId;
         exam.InstructorId = viewModel.InstructorId;
         exam.StartDate = viewModel.StartDate;
-        exam.TotalGrade = viewModel.TotalGrade;
 
         _examrepository.Update(exam);
         _examrepository.SaveChanges();
@@ -82,13 +94,29 @@ public class ExamsController : BaseApiController
     }
 
     [HttpGet]
-    public ActionResult<ExamToReturnDto> TakeExam(int studentId, int Courseid,string examStatus)
+    public ActionResult<ExamToReturnDto> TakeExam(int studentId, int Courseid, string examStatus)
     {
         var exam = _examService.TakeExam(studentId, Courseid, examStatus);
 
+        if (exam == null) { return BadRequest("Can not take more than One final to the same course"); }
+        
         var exanToReturnDto = _mapper.Map<ExamToReturnDto>(exam);
 
         return Ok(exanToReturnDto);
+    }
+
+    [HttpPost]
+    public ActionResult<StudentExam> AddStudentResult(int StudentId, int examId,int Result)
+    {
+        var studentexam = _studentExamService.AddStudentResult(StudentId, examId, Result);
+        return Ok(studentexam);
+    }
+
+    [HttpGet]
+    public ActionResult<StudentExam> GetStudentResult(int StudentId,int examId)
+    {
+        var studentexam = _studentExamService.GetStudentResult(StudentId, examId);
+        return Ok(studentexam);
     }
 
 }

@@ -14,7 +14,7 @@ public class Questionprofile : Profile
 
         CreateMap<Question, QuestionToReturnDto>()
             .ForMember(des => des.Choices,
-                opt => opt.MapFrom(src => src.Choices.Where(x => !x.IsDeleted).Select(c => c.Text).ToList()))
+                opt => opt.MapFrom(src => src.Choices.Where(x => !x.IsDeleted).Select(c => c.Text).ToList())) // !
             .ForMember(des => des.RightAnswer,
                 opt => opt.MapFrom(src => src.Choices.FirstOrDefault(c => c.IsRightAnswer).Text));
 

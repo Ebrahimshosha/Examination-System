@@ -12,6 +12,8 @@ public class ExamProfile:Profile
         CreateMap<Exam,ExamToReturnDto>()
             .ForMember(des=>des.ExamStatus,opt=>opt.MapFrom(src=>src.ExamStatus.ToString()));
 
-        CreateMap<CreateExamViewModel, ExamDto>();
+        CreateMap<CreateManualExamViewModel, ExamManualDto>();
+        CreateMap<CreateAutomaticExamViewModel, ExamAutomaticDto>();
+        CreateMap<CreateExamViewModel, Exam>();
     }
 }
