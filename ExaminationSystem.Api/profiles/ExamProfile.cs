@@ -1,8 +1,4 @@
-﻿using AutoMapper;
-using ExaminationSystem.Api.DTO.Exam;
-using ExaminationSystem.Api.Models;
-using ExaminationSystem.Api.ViewModels.Exam;
-
+﻿
 namespace ExaminationSystem.Api.profiles;
 
 public class ExamProfile:Profile
@@ -15,5 +11,6 @@ public class ExamProfile:Profile
         CreateMap<CreateManualExamViewModel, ExamManualDto>();
         CreateMap<CreateAutomaticExamViewModel, ExamAutomaticDto>();
         CreateMap<CreateExamViewModel, Exam>();
+        CreateMap<CreateExamViewModel, ExamDTO>();
     }
 }

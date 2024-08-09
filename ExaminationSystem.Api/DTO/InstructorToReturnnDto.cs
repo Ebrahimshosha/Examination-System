@@ -1,4 +1,5 @@
-﻿namespace ExaminationSystem.Api.DTO;
+﻿
+namespace ExaminationSystem.Api.DTO;
 
 public class InstructorToReturnnDto
 {

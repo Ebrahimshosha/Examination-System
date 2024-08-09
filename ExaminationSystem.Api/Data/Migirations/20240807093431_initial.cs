@@ -36,6 +36,7 @@ namespace ExaminationSystem.Api.Data.Migirations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Text = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Grade = table.Column<int>(type: "int", nullable: false),
+                    Status = table.Column<int>(type: "int", nullable: false),
                     IsDeleted = table.Column<bool>(type: "bit", nullable: false)
                 },
                 constraints: table =>
@@ -133,6 +134,33 @@ namespace ExaminationSystem.Api.Data.Migirations
                 });
 
             migrationBuilder.CreateTable(
+                name: "StudentCourse",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    CourseId = table.Column<int>(type: "int", nullable: false),
+                    StudentId = table.Column<int>(type: "int", nullable: false),
+                    IsDeleted = table.Column<bool>(type: "bit", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_StudentCourse", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_StudentCourse_Courses_CourseId",
+                        column: x => x.CourseId,
+                        principalTable: "Courses",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_StudentCourse_Students_StudentId",
+                        column: x => x.StudentId,
+                        principalTable: "Students",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "ExamQuestions",
                 columns: table => new
                 {
@@ -155,6 +183,34 @@ namespace ExaminationSystem.Api.Data.Migirations
                         name: "FK_ExamQuestions_Questions_QuestionID",
                         column: x => x.QuestionID,
                         principalTable: "Questions",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "StudentExam",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    StudentId = table.Column<int>(type: "int", nullable: false),
+                    ExamId = table.Column<int>(type: "int", nullable: false),
+                    Result = table.Column<double>(type: "float", nullable: false),
+                    IsDeleted = table.Column<bool>(type: "bit", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_StudentExam", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_StudentExam_Exams_ExamId",
+                        column: x => x.ExamId,
+                        principalTable: "Exams",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_StudentExam_Students_StudentId",
+                        column: x => x.StudentId,
+                        principalTable: "Students",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
@@ -188,6 +244,26 @@ namespace ExaminationSystem.Api.Data.Migirations
                 name: "IX_Exams_InstructorId",
                 table: "Exams",
                 column: "InstructorId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_StudentCourse_CourseId",
+                table: "StudentCourse",
+                column: "CourseId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_StudentCourse_StudentId",
+                table: "StudentCourse",
+                column: "StudentId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_StudentExam_ExamId",
+                table: "StudentExam",
+                column: "ExamId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_StudentExam_StudentId",
+                table: "StudentExam",
+                column: "StudentId");
         }
 
         /// <inheritdoc />
@@ -200,13 +276,19 @@ namespace ExaminationSystem.Api.Data.Migirations
                 name: "ExamQuestions");
 
             migrationBuilder.DropTable(
-                name: "Students");
+                name: "StudentCourse");
+
+            migrationBuilder.DropTable(
+                name: "StudentExam");
+
+            migrationBuilder.DropTable(
+                name: "Questions");
 
             migrationBuilder.DropTable(
                 name: "Exams");
 
             migrationBuilder.DropTable(
-                name: "Questions");
+                name: "Students");
 
             migrationBuilder.DropTable(
                 name: "Courses");

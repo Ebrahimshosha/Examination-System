@@ -1,4 +1,5 @@
-﻿using ExaminationSystem.Api.Interfaces;
+﻿using ExaminationSystem.Api.Exceptions;
+using ExaminationSystem.Api.Interfaces;
 using ExaminationSystem.Api.Models;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
@@ -24,18 +25,16 @@ public class ValidateIfTakenFinalExam : IValidateIfTakenFinalExam
     {
         var studentCourse = _studentCourserepository.Get(x => x.StudentId == studentId && x.CourseId == Courseid);
 
-        if (studentCourse.Count() == 0) { return true; }
+        if (studentCourse.Count() == 0)
+        {
+            throw new BusinessException(ErrorCode.StudentHasNotRegisteredForThisCourse, "This student has not registered for this course");
+        }
 
         if (status == ExamStatus.final)
         {
-            var finalExams = _examrepository.Get(e => e.CourseId == Courseid)
-                                       .Where(e => e.ExamStatus == ExamStatus.final)
-                                       .ToList();
-
-            if (finalExams.Count() > 0) return true;
-
-            var studentexams = _studentExamrepository.Get(s => s.Id == studentId && s.Exam.ExamStatus == ExamStatus.final && s.Exam.CourseId == Courseid)
-                                                        .ToList();
+            var studentexams = _studentExamrepository
+                                .Get(s => s.Id == studentId && s.Exam.ExamStatus == ExamStatus.final && s.Exam.CourseId == Courseid)
+                                .ToList();
 
             if (studentexams.Count > 0) return true;
 

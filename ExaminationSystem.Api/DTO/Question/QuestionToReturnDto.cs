@@ -1,5 +1,4 @@
-﻿using ExaminationSystem.Api.Models;
-
+﻿
 namespace ExaminationSystem.Api.DTO.Question;
 
 public class QuestionToReturnDto

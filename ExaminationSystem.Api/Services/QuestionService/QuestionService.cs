@@ -33,7 +33,8 @@ public class QuestionService : IQuestionService
         var question = _questionRepository.Add(new Question
         {
             Grade = model.Grade,
-            Text = model.Text
+            Text = model.Text,
+            Status = Enum.Parse<QStatus>(model.Status)
 
         });
         _questionRepository.SaveChanges();
@@ -52,25 +53,23 @@ public class QuestionService : IQuestionService
         return totalGrade;
     }
 
-
-
     public List<int> CreateRandomQuestionsIds(int NumberOfQuestions, int CoureId)
     {
         int simple = NumberOfQuestions / 3;
         int medium = NumberOfQuestions / 3;
         int hard = NumberOfQuestions - simple - medium;
 
-        var AllsimpleQuestions = _questionRepository.Get(q => q.Id == CoureId && q.Status == QStatus.simple);
-        var AllmediumQuestions = _questionRepository.Get(q => q.Id == CoureId && q.Status == QStatus.medium);
-        var AllhardQuestions = _questionRepository.Get(q => q.Id == CoureId && q.Status == QStatus.hard);
+        var AllsimpleQuestions = _questionRepository.Get(q =>  q.Status == QStatus.simple);
+        var AllmediumQuestions = _questionRepository.Get(q => q.Status == QStatus.medium);
+        var AllhardQuestions = _questionRepository.Get(q =>  q.Status == QStatus.hard);
 
         var RandomQuestionsIds = new List<int>();
 
         RandomQuestionsIds.AddRange(CreateSpecificRandomQuestionsIds(AllsimpleQuestions, simple));
 
-        RandomQuestionsIds.AddRange(CreateSpecificRandomQuestionsIds(AllmediumQuestions, simple));
+        RandomQuestionsIds.AddRange(CreateSpecificRandomQuestionsIds(AllmediumQuestions, medium));
 
-        RandomQuestionsIds.AddRange(CreateSpecificRandomQuestionsIds(AllhardQuestions, simple));
+        RandomQuestionsIds.AddRange(CreateSpecificRandomQuestionsIds(AllhardQuestions, hard));
 
         return RandomQuestionsIds;
 
@@ -88,6 +87,7 @@ public class QuestionService : IQuestionService
         for (int i = 0; i < NumberOfQuestions; i++)
         {
             int randomIndex = random.Next(0, questions.Count());
+            // Check if randomIndex is exists before
             RandomQuestionsIds.Add(AllQuestionsIds[randomIndex]);
         }
 

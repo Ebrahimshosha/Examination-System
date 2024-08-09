@@ -1,15 +1,6 @@
-﻿using AutoMapper;
-using ExaminationSystem.Api.DTO.Exam;
-using ExaminationSystem.Api.Interfaces;
-using ExaminationSystem.Api.Models;
-using ExaminationSystem.Api.Services.ExamQuestionService;
-using ExaminationSystem.Api.Services.ExamService;
-using ExaminationSystem.Api.Services.StudentExamService;
-using ExaminationSystem.Api.ViewModels.Exam;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Http.HttpResults;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.FileProviders;
+﻿
+using ExaminationSystem.Api.Services.ResultService;
+using ExaminationSystem.Api.ViewModels.QuesrtionsAnswersViewModel;
 
 namespace ExaminationSystem.Api.Controllers;
 
@@ -19,33 +10,34 @@ public class ExamsController : BaseApiController
     private readonly IMapper _mapper;
     private readonly IExamQuestionService _examQuestionService;
     private readonly IStudentExamService _studentExamService;
-    private readonly IGenericRepository<Exam> _examrepository;
+    private readonly IResultService _resultService;
 
     public ExamsController(
         IExamService examService,
         IMapper mapper,
         IExamQuestionService examQuestionService,
         IStudentExamService studentExamService,
-        IGenericRepository<Exam> Examrepository)
+        IResultService resultService)
     {
         _examService = examService;
         _mapper = mapper;
         _examQuestionService = examQuestionService;
         _studentExamService = studentExamService;
-        _examrepository = Examrepository;
+        _resultService = resultService;
     }
 
     [HttpGet]
     public ActionResult<IEnumerable<Exam>> GetAllExams()
     {
-        return _examrepository.GetAll().ToList();
+        var exams = _examService.GetAllExamsService();
 
+        return Ok(exams);
     }
 
     [HttpGet("{id}")]
     public ActionResult<Exam> GetExamById(int id)
     {
-        var exam = _examrepository.GetByID(id);
+        var exam = _examService.GetExamServiceById(id);
         return Ok(exam);
     }
 
@@ -56,7 +48,7 @@ public class ExamsController : BaseApiController
 
         var examToReturnDto = _examService.CreateManualExamService(examDto);
 
-        return examToReturnDto;
+        return Ok(examToReturnDto);
     }
 
     [HttpPost("Automatic")]
@@ -72,14 +64,9 @@ public class ExamsController : BaseApiController
     [HttpPut]
     public Exam UpdateExam(int id, CreateExamViewModel viewModel)
     {
-        var exam = _examrepository.GetByID(id);
-        exam.Id = id;
-        exam.CourseId = viewModel.CourseId;
-        exam.InstructorId = viewModel.InstructorId;
-        exam.StartDate = viewModel.StartDate;
+        var examDTO = _mapper.Map<ExamDTO>(viewModel);
 
-        _examrepository.Update(exam);
-        _examrepository.SaveChanges();
+        var exam = _examService.UpdateExamService(id, examDTO);
 
         return exam;
     }
@@ -87,9 +74,7 @@ public class ExamsController : BaseApiController
     [HttpDelete]
     public ActionResult DeleteExamById(int id)
     {
-        var exam = _examrepository.GetByID(id);
-        _examrepository.Delete(exam);
-        _examrepository.SaveChanges();
+        _examService.DeleteExamService(id);
         return Ok();
     }
 
@@ -99,24 +84,17 @@ public class ExamsController : BaseApiController
         var exam = _examService.TakeExam(studentId, Courseid, examStatus);
 
         if (exam == null) { return BadRequest("Can not take more than One final to the same course"); }
-        
+
         var exanToReturnDto = _mapper.Map<ExamToReturnDto>(exam);
 
         return Ok(exanToReturnDto);
     }
 
     [HttpPost]
-    public ActionResult<StudentExam> AddStudentResult(int StudentId, int examId,int Result)
+    public ActionResult<int> StudentSubmitExam(int StudentId, int examId, List<quesrtionsAnswersViewModel> quesrtionsAnswersViewModel)
     {
-        var studentexam = _studentExamService.AddStudentResult(StudentId, examId, Result);
-        return Ok(studentexam);
-    }
-
-    [HttpGet]
-    public ActionResult<StudentExam> GetStudentResult(int StudentId,int examId)
-    {
-        var studentexam = _studentExamService.GetStudentResult(StudentId, examId);
-        return Ok(studentexam);
+        var Grede = _examService.StudentSubmitExam(StudentId, examId, quesrtionsAnswersViewModel);
+        return Ok(Grede);
     }
 
 }

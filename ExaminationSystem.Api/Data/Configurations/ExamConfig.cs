@@ -1,7 +1,4 @@
-﻿using ExaminationSystem.Api.Models;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata.Builders;
-
+﻿
 namespace ExaminationSystem.Api.Data.Configurations;
 
 public class ExamConfig : IEntityTypeConfiguration<Exam>

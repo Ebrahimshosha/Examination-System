@@ -1,13 +1,4 @@
-﻿using AutoMapper;
-using ExaminationSystem.Api.Data;
-using ExaminationSystem.Api.DTO.Course;
-using ExaminationSystem.Api.Interfaces;
-using ExaminationSystem.Api.Models;
-using ExaminationSystem.Api.Services.StudentService;
-using ExaminationSystem.Api.ViewModels.Course;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-
+﻿
 namespace ExaminationSystem.Api.Controllers;
 
 public class CoursesController : BaseApiController
@@ -84,10 +75,10 @@ public class CoursesController : BaseApiController
         return Ok();
     }
 
-    [HttpPost("StudentId{id}")]
-    public ActionResult EnrollToCourse(int id,int CourseId)
+    [HttpPost]
+    public ActionResult<StudentCourse> EnrollToCourse(int id,int CourseId)
     {
-        _studentCourseService.EnrollCourseToStudent(id, CourseId);
-        return Ok();
+        var studentCourse  = _studentCourseService.EnrollCourseToStudent(id, CourseId);
+        return Ok(studentCourse);
     }
 }

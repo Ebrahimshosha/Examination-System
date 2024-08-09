@@ -1,7 +1,4 @@
-﻿using ExaminationSystem.Api.DTO;
-using ExaminationSystem.Api.Models;
-using ExaminationSystem.Api.ViewModels.Instructor;
-
+﻿
 namespace ExaminationSystem.Api.Extentions;
 
 public static class InstructorViewModelExtensions

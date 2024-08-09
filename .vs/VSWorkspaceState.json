@@ -1,0 +1,12 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\ExaminationSystem.Api",
+    "\\ExaminationSystem.Api\\Controllers",
+    "\\ExaminationSystem.Api\\Services\\ExamService",
+    "\\ExaminationSystem.Api\\Services\\ResultService",
+    "\\ExaminationSystem.Api\\Services\\StudentExamService"
+  ],
+  "SelectedNode": "\\ExaminationSystem.Api\\Controllers",
+  "PreviewInSolutionExplorer": false
+}

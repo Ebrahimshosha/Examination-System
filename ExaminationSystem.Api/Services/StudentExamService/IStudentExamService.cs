@@ -5,7 +5,8 @@ namespace ExaminationSystem.Api.Services.StudentExamService;
 
 public interface IStudentExamService
 {
-    StudentExam AddStudentResult(int StudentId, int examId, int Result);
-
-    StudentExam GetStudentResult(int StudentId, int examId);
+    bool CkeckIfStudentSubmittedTheExam(int examId, int StudentId);
+    void AddStudentExam(int examId, int studentId);
+    void SubmitExam(int examId, int StudentId);
+    bool CheckstudentTakethisExamBefore(int examId, int StudentId);
 }

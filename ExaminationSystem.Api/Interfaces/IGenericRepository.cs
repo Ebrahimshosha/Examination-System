@@ -1,7 +1,4 @@
-﻿using ExaminationSystem.Api.Models;
-using Microsoft.AspNetCore.Mvc.RazorPages;
-using System.Linq.Expressions;
-
+﻿
 namespace ExaminationSystem.Api.Interfaces;
 
 public interface IGenericRepository<T> where T : BaseModel

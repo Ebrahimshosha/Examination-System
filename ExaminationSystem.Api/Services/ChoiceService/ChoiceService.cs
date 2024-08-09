@@ -1,6 +1,4 @@
-﻿using ExaminationSystem.Api.Interfaces;
-using ExaminationSystem.Api.Models;
-
+﻿
 namespace ExaminationSystem.Api.Services.ChoiceService;
 
 public class ChoiceService: IChoiceService

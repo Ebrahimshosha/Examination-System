@@ -1,9 +1,4 @@
-﻿using ExaminationSystem.Api.Extentions;
-using ExaminationSystem.Api.Interfaces;
-using ExaminationSystem.Api.Models;
-using ExaminationSystem.Api.ViewModels.Instructor;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+﻿
 
 namespace ExaminationSystem.Api.Controllers;
 

@@ -6,6 +6,6 @@ public class StudentExam:BaseModel
     public Student Student { get; set; }
     public int ExamId { get; set; }
     public Exam Exam { get; set; }
-    public double Result { get; set; }
+    public bool IsSubmitted { get; set; }
 
 }

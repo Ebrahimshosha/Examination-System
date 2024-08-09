@@ -1,12 +1,4 @@
-﻿using AutoMapper;
-using ExaminationSystem.Api.DTO.Question;
-using ExaminationSystem.Api.Interfaces;
-using ExaminationSystem.Api.Models;
-using ExaminationSystem.Api.Services.ChoiceService;
-using ExaminationSystem.Api.Services.QuestionService;
-using ExaminationSystem.Api.ViewModels.CreateQuestionViewModel;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+﻿
 
 namespace ExaminationSystem.Api.Controllers;
 

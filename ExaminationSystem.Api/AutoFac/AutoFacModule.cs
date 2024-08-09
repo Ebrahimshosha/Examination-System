@@ -1,13 +1,5 @@
 ﻿using Autofac;
-using ExaminationSystem.Api.Interfaces;
-using ExaminationSystem.Api.Repositories;
-using ExaminationSystem.Api.Services;
-using ExaminationSystem.Api.Services.ChoiceService;
-using ExaminationSystem.Api.Services.ExamQuestionService;
-using ExaminationSystem.Api.Services.ExamService;
-using ExaminationSystem.Api.Services.QuestionService;
-using ExaminationSystem.Api.Services.StudentExamService;
-using ExaminationSystem.Api.Services.StudentService;
+
 //using System.Reflection;
 
 namespace ExaminationSystem.Api.AutoFac;

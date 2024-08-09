@@ -1,13 +1,4 @@
-﻿using AutoMapper;
-using ExaminationSystem.Api.DTO.Course;
-using ExaminationSystem.Api.DTO.Student;
-using ExaminationSystem.Api.Interfaces;
-using ExaminationSystem.Api.Models;
-using ExaminationSystem.Api.ViewModels.Course;
-using ExaminationSystem.Api.ViewModels.Student;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-
+﻿
 namespace ExaminationSystem.Api.Controllers;
 
 public class StudentsController : BaseApiController

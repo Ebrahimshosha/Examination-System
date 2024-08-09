@@ -1,6 +1,4 @@
-﻿using ExaminationSystem.Api.Models;
-using Microsoft.EntityFrameworkCore;
-using System.Diagnostics;
+﻿
 using System.Reflection;
 
 namespace ExaminationSystem.Api.Data;
@@ -29,4 +27,6 @@ public class StoreContext : DbContext
     public DbSet<Choice> Choices { get; set; }
     public DbSet<ExamQuestion> ExamQuestions { get; set; }
     public DbSet<Student> Students { get; set; }
+    public DbSet<Result> Results { get; set; }
+
 }

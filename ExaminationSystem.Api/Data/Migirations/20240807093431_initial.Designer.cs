@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ExaminationSystem.Api.Data.Migirations
 {
     [DbContext(typeof(StoreContext))]
-    [Migration("20240801122105_StudentModule")]
-    partial class StudentModule
+    [Migration("20240807093431_initial")]
+    partial class initial
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -186,6 +186,9 @@ namespace ExaminationSystem.Api.Data.Migirations
 
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
+
+                    b.Property<int>("Status")
+                        .HasColumnType("int");
 
                     b.Property<string>("Text")
                         .IsRequired()

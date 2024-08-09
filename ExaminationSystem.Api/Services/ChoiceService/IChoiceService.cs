@@ -1,4 +1,5 @@
-﻿namespace ExaminationSystem.Api.Services.ChoiceService;
+﻿
+namespace ExaminationSystem.Api.Services.ChoiceService;
 
 public interface IChoiceService
 {
