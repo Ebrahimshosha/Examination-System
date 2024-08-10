@@ -8,13 +8,11 @@ namespace ExaminationSystem.Api.Services.ExamService;
 
 public interface IExamService
 {
-     IEnumerable<Exam> GetAllExamsService();
-
-    Exam GetExamServiceById(int id);
-    ExamToReturnDto CreateManualExamService(ExamManualDto model);
-    ExamToReturnDto CreateAutomaticExamService(ExamAutomaticDto model);
-    Exam UpdateExamService(int id, ExamDTO examDTO);
-    Exam TakeExam(int studentId, int Courseid, string examStatus);
-    bool DeleteExamService(int id);
-    int StudentSubmitExam(int StudentId, int examId, List<quesrtionsAnswersViewModel> quesrtionsAnswersViewModel);
+    ExamToReturnDto AddExamService(CreateExamDto model, int totalgrade);
+    // IEnumerable<Exam> GetAllExamsService();
+    //Exam GetExamServiceById(int id);
+    //Exam UpdateExamService(int id, ExamDTO examDTO);
+    //Exam TakeExam(int studentId, int Courseid, string examStatus);
+    //bool DeleteExamService(int id);
+    //int StudentSubmitExam(int StudentId, int examId, List<quesrtionsAnswersViewModel> quesrtionsAnswersViewModel);
 }

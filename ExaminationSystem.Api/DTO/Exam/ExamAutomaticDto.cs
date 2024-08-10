@@ -7,5 +7,4 @@ public class ExamAutomaticDto
     public int CourseId { get; set; }
     public string ExamStatus { get; set; }
     public int NunmberOfQuestions { get; set; }
-
 }

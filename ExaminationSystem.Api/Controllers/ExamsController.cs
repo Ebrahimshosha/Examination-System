@@ -26,20 +26,20 @@ public class ExamsController : BaseApiController
         _resultService = resultService;
     }
 
-    [HttpGet]
-    public ActionResult<IEnumerable<Exam>> GetAllExams()
-    {
-        var exams = _examService.GetAllExamsService();
+    //[HttpGet]
+    //public ActionResult<IEnumerable<Exam>> GetAllExams()
+    //{
+    //    //var exams = _examService.GetAllExamsService();
 
-        return Ok(exams);
-    }
+    //    return Ok(exams);
+    //}
 
-    [HttpGet("{id}")]
-    public ActionResult<Exam> GetExamById(int id)
-    {
-        var exam = _examService.GetExamServiceById(id);
-        return Ok(exam);
-    }
+    //[HttpGet("{id}")]
+    //public ActionResult<Exam> GetExamById(int id)
+    //{
+    //    //var exam = _examService.GetExamServiceById(id);
+    //    //return Ok(exam);
+    //}
 
     [HttpPost("Manual")]
     public ActionResult<ExamToReturnDto> CreateManualExam(CreateManualExamViewModel viewModel)

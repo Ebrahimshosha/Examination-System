@@ -12,5 +12,7 @@ public class ExamProfile:Profile
         CreateMap<CreateAutomaticExamViewModel, ExamAutomaticDto>();
         CreateMap<CreateExamViewModel, Exam>();
         CreateMap<CreateExamViewModel, ExamDTO>();
+        CreateMap<ExamAutomaticDto, CreateExamDto>();
+        CreateMap<ExamManualDto, CreateExamDto>();
     }
 }
