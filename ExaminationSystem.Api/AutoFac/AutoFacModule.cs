@@ -1,4 +1,6 @@
 ﻿using Autofac;
+using ExaminationSystem.Api.Services.CourseService;
+using ExaminationSystem.Api.Services.ResultService;
 
 //using System.Reflection;
 
@@ -16,8 +18,9 @@ public class AutoFacModule : Module
         builder.RegisterAssemblyTypes(typeof(IQuestionService).Assembly).AsImplementedInterfaces().InstancePerLifetimeScope();
         builder.RegisterAssemblyTypes(typeof(IChoiceService).Assembly).AsImplementedInterfaces().InstancePerLifetimeScope();
         builder.RegisterAssemblyTypes(typeof(IStudentCourseService).Assembly).AsImplementedInterfaces().InstancePerLifetimeScope();
-        builder.RegisterAssemblyTypes(typeof(IValidateIfTakenFinalExam).Assembly).AsImplementedInterfaces().InstancePerLifetimeScope();
         builder.RegisterAssemblyTypes(typeof(IStudentExamService).Assembly).AsImplementedInterfaces().InstancePerLifetimeScope();
+        builder.RegisterAssemblyTypes(typeof(ICourseService).Assembly).AsImplementedInterfaces().InstancePerLifetimeScope();
+        builder.RegisterAssemblyTypes(typeof(IResultService).Assembly).AsImplementedInterfaces().InstancePerLifetimeScope();
 
     }
 }

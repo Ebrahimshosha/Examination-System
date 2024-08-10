@@ -1,6 +1,7 @@
 ﻿
 
 using ExaminationSystem.Api.Exceptions;
+using ExaminationSystem.Api.Services.CourseService;
 using ExaminationSystem.Api.Services.ResultService;
 using ExaminationSystem.Api.ViewModels.QuesrtionsAnswersViewModel;
 
@@ -11,32 +12,32 @@ public class ExamService : IExamService
     private readonly IGenericRepository<Exam> _examrepository;
     private readonly IGenericRepository<Choice> _choiceRepository;
     private readonly IExamQuestionService _examQuestionService;
-    private readonly IValidateIfTakenFinalExam _validateIfTakenFinalExam;
     private readonly IResultService _resultService;
     private readonly IGenericRepository<StudentExam> _studentExamRepository;
     private readonly IQuestionService _questionService;
     private readonly IStudentExamService _studentExamService;
+    private readonly ICourseService _courseService;
     private readonly IMapper _mapper;
 
     public ExamService(
         IGenericRepository<Exam> examRepository,
         IGenericRepository<Choice> ChoiceRepository,
         IExamQuestionService examQuestionService,
-        IValidateIfTakenFinalExam validateIfTakenFinalExam,
         IResultService resultService,
         IGenericRepository<StudentExam> studentExamRepository,
         IQuestionService questionService,
         IStudentExamService studentExamService,
+        ICourseService courseService,
         IMapper mapper)
     {
         _examrepository = examRepository;
         _choiceRepository = ChoiceRepository;
         _examQuestionService = examQuestionService;
-        _validateIfTakenFinalExam = validateIfTakenFinalExam;
         _resultService = resultService;
         _studentExamRepository = studentExamRepository;
         _questionService = questionService;
         _studentExamService = studentExamService;
+        _courseService = courseService;
         _mapper = mapper;
     }
 
@@ -54,57 +55,67 @@ public class ExamService : IExamService
 
     public ExamToReturnDto CreateManualExamService(ExamManualDto model)
     {
-        var totalgrade = _questionService.CalculateTotalGrade(model.QuestionsIDs);
+        var IsInstructorGivesCourse = _courseService.ValidateIfInstructorGivesCourse(model.CourseId, model.InstructorId);
 
-        var entity = _examrepository.Add(new Exam
+        if (IsInstructorGivesCourse)
         {
-            StartDate = model.StartDate,
-            InstructorId = model.InstructorId,
-            CourseId = model.CourseId,
-            TotalGrade = totalgrade,
-            ExamStatus = Enum.Parse<ExamStatus>(model.ExamStatus/*, ignoreCase: true*/)
-        });
+            var totalgrade = _questionService.CalculateTotalGrade(model.QuestionsIDs);
+            var entity = _examrepository.Add(new Exam
+            {
+                StartDate = model.StartDate,
+                InstructorId = model.InstructorId,
+                CourseId = model.CourseId,
+                TotalGrade = totalgrade,
+                ExamStatus = Enum.Parse<ExamStatus>(model.ExamStatus/*, ignoreCase: true*/)
+            });
 
-        _examrepository.SaveChanges();
+            _examrepository.SaveChanges();
 
-        var Qids = _examQuestionService.CreateExamQuestion(entity.Id, model.QuestionsIDs);
+            var Qids = _examQuestionService.CreateExamQuestion(entity.Id, model.QuestionsIDs);
 
-        var examToReturnDto = _mapper.Map<ExamToReturnDto>(entity);
+            var examToReturnDto = _mapper.Map<ExamToReturnDto>(entity);
 
-        return examToReturnDto;
-
+            return examToReturnDto;
+        }
+        return null;
     }
 
     public ExamToReturnDto CreateAutomaticExamService(ExamAutomaticDto model)
     {
-        var RandomQuestionsIds = _questionService.CreateRandomQuestionsIds(model.NunmberOfQuestions, model.CourseId);
+        var IsInstructorGivesCourse = _courseService.ValidateIfInstructorGivesCourse(model.CourseId, model.InstructorId);
 
-        var totalgrade = _questionService.CalculateTotalGrade(RandomQuestionsIds);
-
-        var entity = _examrepository.Add(new Exam
+        if (IsInstructorGivesCourse)
         {
-            StartDate = model.StartDate,
-            InstructorId = model.InstructorId,
-            CourseId = model.CourseId,
-            TotalGrade = totalgrade,
-            ExamStatus = Enum.Parse<ExamStatus>(model.ExamStatus/*, ignoreCase: true*/)
-        });
+            var RandomQuestionsIds = _questionService.CreateRandomQuestionsIds(model.NunmberOfQuestions, model.CourseId);
+
+            var totalgrade = _questionService.CalculateTotalGrade(RandomQuestionsIds);
+
+            var entity = _examrepository.Add(new Exam
+            {
+                StartDate = model.StartDate,
+                InstructorId = model.InstructorId,
+                CourseId = model.CourseId,
+                TotalGrade = totalgrade,
+                ExamStatus = Enum.Parse<ExamStatus>(model.ExamStatus/*, ignoreCase: true*/)
+            });
 
 
-        _examrepository.SaveChanges();
+            _examrepository.SaveChanges();
 
-        var Qids = _examQuestionService.CreateExamQuestion(entity.Id, RandomQuestionsIds);
+            var Qids = _examQuestionService.CreateExamQuestion(entity.Id, RandomQuestionsIds);
 
-        var examToReturnDto = _mapper.Map<ExamToReturnDto>(entity);
+            var examToReturnDto = _mapper.Map<ExamToReturnDto>(entity);
 
-        return examToReturnDto;
+            return examToReturnDto;
+        }
+        return null;
     }
 
     public Exam TakeExam(int studentId, int Courseid, string status)
     {
         var examStatus = Enum.Parse<ExamStatus>(status);
 
-        var hasTakenFinalExam = _validateIfTakenFinalExam.HasTakenFinalExam(studentId, Courseid, examStatus);
+        var hasTakenFinalExam = _studentExamService.HasTakenFinalExam(studentId, Courseid, examStatus);
 
         if (!hasTakenFinalExam)
         {

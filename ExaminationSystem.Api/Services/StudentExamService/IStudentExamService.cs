@@ -9,4 +9,5 @@ public interface IStudentExamService
     void AddStudentExam(int examId, int studentId);
     void SubmitExam(int examId, int StudentId);
     bool CheckstudentTakethisExamBefore(int examId, int StudentId);
+    bool HasTakenFinalExam(int studentId, int Courseid, ExamStatus status);
 }

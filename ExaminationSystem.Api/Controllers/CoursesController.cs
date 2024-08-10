@@ -7,8 +7,8 @@ public class CoursesController : BaseApiController
     private readonly IStudentCourseService _studentCourseService;
     private readonly IMapper _mapper;
 
-    public CoursesController(IGenericRepository<Course> Courserepository
-        ,IStudentCourseService studentCourseService,
+    public CoursesController(IGenericRepository<Course> Courserepository,
+        IStudentCourseService studentCourseService,
         IMapper mapper)
     {
         _courserepository = Courserepository;
@@ -76,9 +76,9 @@ public class CoursesController : BaseApiController
     }
 
     [HttpPost]
-    public ActionResult<StudentCourse> EnrollToCourse(int id,int CourseId)
+    public ActionResult<StudentCourse> EnrollToCourse(int studentId, int courseId)
     {
-        var studentCourse  = _studentCourseService.EnrollCourseToStudent(id, CourseId);
+        var studentCourse = _studentCourseService.EnrollCourseToStudent(studentId, courseId);
         return Ok(studentCourse);
     }
 }

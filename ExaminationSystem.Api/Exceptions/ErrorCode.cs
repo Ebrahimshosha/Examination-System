@@ -7,5 +7,6 @@ public enum ErrorCode
     UnKnown = 1,
     StudentHasNotRegisteredForThisCourse = 1000,
     NotallowedToTakeSameExamAnotherTime = 2000,
+    InstructordidntGivethatCourse = 3000
 }
 
