@@ -6,11 +6,12 @@ namespace ExaminationSystem.Api.Mediators.ExamMediator;
 
 public interface IExamMediator
 {
-    ExamToReturnDto CreateManualExamService(ExamManualDto model);
-    ExamToReturnDto CreateAutomaticExamService(ExamAutomaticDto model);
+    ExamToReturnDto CreateManualExam(ExamManualDto model);
+    ExamToReturnDto CreateAutomaticExam(ExamAutomaticDto model);
     IEnumerable<Exam> GetAllExamsService();
     Exam GetExamServiceById(int id);
+    Exam UpdateExam(int id, ExamDTO examDTO);
     public Exam TakeExam(int studentId, int Courseid, string status);
-    public bool DeleteExamService(int id);
+    public bool DeleteExam(int id);
     int StudentSubmitExam(int StudentId, int examId, List<quesrtionsAnswersViewModel> quesrtionsAnswersViewModel);
 }

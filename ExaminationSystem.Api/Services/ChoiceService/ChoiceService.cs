@@ -35,4 +35,10 @@ public class ChoiceService: IChoiceService
         _choiceRepository.SaveChanges();
 
     }
+    public IQueryable<Choice> GetChoicesbyQid(int id)
+    {
+    var choices = _choiceRepository.Get(c => c.QuestionID == id);
+
+        return choices;
+    }
 }

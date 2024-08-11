@@ -13,7 +13,6 @@ public class StudentExamService : IStudentExamService
     public StudentExamService(IGenericRepository<StudentExam> repository,
         IGenericRepository<StudentCourse> StudentCourserepository,
         IGenericRepository<StudentExam> StudentExamrepository
-
         )
     {
         _repository = repository;
@@ -38,7 +37,6 @@ public class StudentExamService : IStudentExamService
     
     public bool CkeckIfStudentSubmittedTheExam(int examId, int StudentId)
     {
-
         var studentExam = _repository.Get(s => s.ExamId == examId && s.StudentId == StudentId && s.IsSubmitted);
         if (studentExam is not null)
         {
@@ -68,7 +66,6 @@ public class StudentExamService : IStudentExamService
         }
         return false;
     }
-
 
     public void SubmitExam(int examId, int StudentId)
     {

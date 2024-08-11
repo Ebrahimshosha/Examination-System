@@ -1,4 +1,6 @@
 ﻿
+using ExaminationSystem.Api.Helpers;
+using ExaminationSystem.Api.Mediators.ExamMediator;
 using ExaminationSystem.Api.Services.ResultService;
 using ExaminationSystem.Api.ViewModels.QuesrtionsAnswersViewModel;
 
@@ -6,47 +8,35 @@ namespace ExaminationSystem.Api.Controllers;
 
 public class ExamsController : BaseApiController
 {
-    private readonly IExamService _examService;
-    private readonly IMapper _mapper;
-    private readonly IExamQuestionService _examQuestionService;
-    private readonly IStudentExamService _studentExamService;
-    private readonly IResultService _resultService;
+    private readonly IExamMediator _mediator;
 
-    public ExamsController(
-        IExamService examService,
-        IMapper mapper,
-        IExamQuestionService examQuestionService,
-        IStudentExamService studentExamService,
-        IResultService resultService)
+    public ExamsController(IExamMediator mediator)
     {
-        _examService = examService;
-        _mapper = mapper;
-        _examQuestionService = examQuestionService;
-        _studentExamService = studentExamService;
-        _resultService = resultService;
+        _mediator = mediator;
     }
 
-    //[HttpGet]
-    //public ActionResult<IEnumerable<Exam>> GetAllExams()
-    //{
-    //    //var exams = _examService.GetAllExamsService();
+    [HttpGet]
+    public ActionResult<IEnumerable<Exam>> GetAllExams()
+    {
+        var exams = _mediator.GetAllExamsService();
 
-    //    return Ok(exams);
-    //}
+        return Ok(exams);
+    }
 
-    //[HttpGet("{id}")]
-    //public ActionResult<Exam> GetExamById(int id)
-    //{
-    //    //var exam = _examService.GetExamServiceById(id);
-    //    //return Ok(exam);
-    //}
+    [HttpGet("{id}")]
+    public ActionResult<Exam> GetExamById(int id)
+    {
+        var exam = _mediator.GetExamServiceById(id);
+
+        return Ok(exam);
+    }
 
     [HttpPost("Manual")]
     public ActionResult<ExamToReturnDto> CreateManualExam(CreateManualExamViewModel viewModel)
     {
-        var examDto = _mapper.Map<ExamManualDto>(viewModel);
+        var examDto = viewModel.MapOne<ExamManualDto>();
 
-        var examToReturnDto = _examService.CreateManualExamService(examDto);
+        var examToReturnDto = _mediator.CreateManualExam(examDto);
 
         return Ok(examToReturnDto);
     }
@@ -54,9 +44,9 @@ public class ExamsController : BaseApiController
     [HttpPost("Automatic")]
     public ActionResult<ExamToReturnDto> CreateAutomaticExam(CreateAutomaticExamViewModel viewModel)
     {
-        var examDto = _mapper.Map<ExamAutomaticDto>(viewModel);
+        var examDto = viewModel.MapOne<ExamAutomaticDto>();
 
-        var examToReturnDto = _examService.CreateAutomaticExamService(examDto);
+        var examToReturnDto = _mediator.CreateAutomaticExam(examDto);
 
         return examToReturnDto;
     }
@@ -64,9 +54,9 @@ public class ExamsController : BaseApiController
     [HttpPut]
     public Exam UpdateExam(int id, CreateExamViewModel viewModel)
     {
-        var examDTO = _mapper.Map<ExamDTO>(viewModel);
+        var examDTO = viewModel.MapOne<ExamDTO>();
 
-        var exam = _examService.UpdateExamService(id, examDTO);
+        var exam = _mediator.UpdateExam(id, examDTO);
 
         return exam;
     }
@@ -74,18 +64,18 @@ public class ExamsController : BaseApiController
     [HttpDelete]
     public ActionResult DeleteExamById(int id)
     {
-        _examService.DeleteExamService(id);
+        _mediator.DeleteExam(id);
         return Ok();
     }
 
     [HttpGet]
     public ActionResult<ExamToReturnDto> TakeExam(int studentId, int Courseid, string examStatus)
     {
-        var exam = _examService.TakeExam(studentId, Courseid, examStatus);
+        var exam = _mediator.TakeExam(studentId, Courseid, examStatus);
 
         if (exam == null) { return BadRequest("Can not take more than One final to the same course"); }
 
-        var exanToReturnDto = _mapper.Map<ExamToReturnDto>(exam);
+        var exanToReturnDto = exam.MapOne<ExamToReturnDto>();
 
         return Ok(exanToReturnDto);
     }
@@ -93,8 +83,7 @@ public class ExamsController : BaseApiController
     [HttpPost]
     public ActionResult<int> StudentSubmitExam(int StudentId, int examId, List<quesrtionsAnswersViewModel> quesrtionsAnswersViewModel)
     {
-        var Grede = _examService.StudentSubmitExam(StudentId, examId, quesrtionsAnswersViewModel);
+        var Grede = _mediator.StudentSubmitExam(StudentId, examId, quesrtionsAnswersViewModel);
         return Ok(Grede);
     }
-
 }

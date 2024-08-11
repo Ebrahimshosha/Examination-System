@@ -5,5 +5,5 @@ public interface IChoiceService
 {
     void Addchoice(int QuestionId, List<string> choices, string RightAnswer);
     void Removechoice(int QuestionId);
-
+    IQueryable<Choice> GetChoicesbyQid(int id);
 }
